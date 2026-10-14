@@ -1,0 +1,83 @@
+/* =========================================================
+   Flavoriz Admin Components
+   ========================================================= */
+
+/* =========================================================
+   Input
+   ========================================================= */
+
+@utility admin-input {
+  @apply h-10 w-full rounded-admin-md;
+  @apply border border-admin-border;
+  @apply bg-admin-card;
+  @apply px-3;
+  @apply text-admin-base text-admin-text;
+  @apply outline-none;
+  @apply placeholder:text-admin-text-soft;
+
+  @apply dark:border-gray-700;
+  @apply dark:bg-gray-900;
+  @apply dark:text-gray-100;
+  @apply dark:placeholder:text-gray-500;
+
+  @apply focus:border-admin-primary;
+  @apply focus:ring-2;
+  @apply focus:ring-admin-primary/20;
+}
+
+/* =========================================================
+   Card
+   ========================================================= */
+
+@utility admin-card {
+  @apply rounded-admin-lg;
+  @apply border border-admin-border;
+  @apply bg-admin-card;
+  @apply text-admin-text;
+  @apply shadow-admin;
+
+  @apply dark:border-gray-800;
+  @apply dark:bg-gray-900;
+}
+
+/* =========================================================
+   Secondary Button
+   ========================================================= */
+
+@utility admin-btn-secondary {
+  @apply inline-flex items-center justify-center;
+  @apply rounded-admin-md;
+  @apply border border-admin-border;
+  @apply bg-admin-card;
+  @apply px-4 py-2.5;
+  @apply text-admin-sm font-admin-semibold;
+  @apply text-admin-text;
+  @apply transition;
+
+  @apply hover:bg-admin-surface;
+
+  @apply dark:border-gray-700;
+  @apply dark:bg-gray-900;
+  @apply dark:text-gray-100;
+  @apply dark:hover:bg-gray-800;
+}
+
+/* =========================================================
+   Primary Button
+   ========================================================= */
+
+@utility admin-btn-primary {
+  @apply inline-flex items-center justify-center;
+  @apply rounded-admin-md;
+  @apply bg-gray-900;
+  @apply px-4 py-2.5;
+  @apply text-admin-sm font-admin-semibold;
+  @apply text-white;
+  @apply transition;
+
+  @apply hover:bg-gray-800;
+
+  @apply dark:bg-white;
+  @apply dark:text-gray-900;
+  @apply dark:hover:bg-gray-200;
+}

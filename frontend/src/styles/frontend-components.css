@@ -1,0 +1,243 @@
+/* ==========================================================================
+   TYPOGRAPHY
+   ========================================================================== */
+
+@utility font-display {
+  font-family: var(--font-display);
+}
+
+@utility text-primary {
+  color: var(--color-primary);
+}
+
+@utility text-muted {
+  color: var(--color-text-muted);
+}
+
+@utility text-soft {
+  color: var(--color-text-soft);
+}
+
+/* ==========================================================================
+   BACKGROUNDS
+   ========================================================================== */
+
+@utility bg-surface {
+  background-color: var(--color-surface);
+}
+
+@utility bg-muted {
+  background-color: var(--color-surface-muted);
+}
+
+/* ==========================================================================
+   CONTAINER
+   ========================================================================== */
+
+@utility container-site {
+  @apply mx-auto;
+
+  width: min(calc(100% - 40px), var(--container-site));
+
+  @media (max-width: 768px) {
+    width: min(calc(100% - 28px), var(--container-site));
+  }
+}
+
+/* ==========================================================================
+   SECTION SPACING
+   ========================================================================== */
+
+@utility section-space {
+  padding-block: clamp(60px, 6vw, 130px);
+
+  @media (max-width: 768px) {
+    padding-block: 72px;
+  }
+}
+
+/* ==========================================================================
+   PRIMARY BUTTON
+   ========================================================================== */
+
+@utility btn-primary {
+  @apply inline-flex items-center justify-center;
+
+  gap: 9px;
+  min-height: 48px;
+  padding-inline: 21px;
+
+  border: 1px solid transparent;
+  border-radius: 999px;
+
+  background-color: var(--color-primary);
+  color: #171717;
+
+  font-weight: 700;
+
+  box-shadow: 0 10px 25px rgb(246 163 19 / 20%);
+
+  transition:
+    transform 220ms ease,
+    background-color 220ms ease,
+    color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+
+  &:hover {
+    background-color: var(--color-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgb(246 163 19 / 28%);
+  }
+}
+
+/* ==========================================================================
+   DARK BUTTON
+   ========================================================================== */
+
+@utility btn-dark {
+  @apply inline-flex items-center justify-center;
+
+  gap: 9px;
+  min-height: 48px;
+  padding-inline: 21px;
+
+  border: 1px solid transparent;
+  border-radius: 999px;
+
+  background-color: var(--color-secondary);
+  color: var(--color-bg);
+
+  font-weight: 700;
+
+  transition:
+    transform 220ms ease,
+    background-color 220ms ease,
+    color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+/* ==========================================================================
+   LIGHT BUTTON
+   ========================================================================== */
+
+@utility btn-light {
+  @apply inline-flex items-center justify-center;
+
+  gap: 9px;
+  min-height: 48px;
+  padding-inline: 21px;
+
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+
+  background-color: var(--color-surface);
+  color: var(--color-text);
+
+  font-weight: 700;
+
+  transition:
+    transform 220ms ease,
+    background-color 220ms ease,
+    color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+/* ==========================================================================
+   FRONTEND CARD
+   ========================================================================== */
+
+@utility frontend-card {
+  @apply border bg-surface shadow-sm;
+
+  border-radius: var(--radius-lg);
+  border-color: var(--color-border);
+
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+/* ==========================================================================
+   ARTICLE CARD
+   ========================================================================== */
+
+@utility article-card {
+  @apply overflow-hidden border bg-surface;
+
+  border-radius: 30px;
+  border-color: var(--color-border);
+
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease;
+}
+
+/* ==========================================================================
+   RECIPE IMAGE
+   ========================================================================== */
+
+@utility recipe-image {
+  transition: transform 650ms cubic-bezier(0.2, 0.75, 0.2, 1);
+}
+
+.recipe-card:hover .recipe-image {
+  transform: scale(1.055);
+}
+
+/* ==========================================================================
+   REVEAL
+   ========================================================================== */
+
+@utility reveal {
+  will-change: transform, opacity;
+}
+
+@utility btn-icon {
+  @apply inline-grid size-10 place-items-center;
+
+  border: 1px solid transparent;
+  border-radius: 999px;
+
+  background-color: var(--color-secondary);
+  color: var(--color-bg);
+
+  transition:
+    transform 220ms ease,
+    background-color 220ms ease,
+    color 220ms ease,
+    box-shadow 220ms ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+@utility nav-link {
+  @apply text-sm font-semibold;
+
+  color: var(--color-text-muted);
+  transition: color 180ms ease;
+
+  &:hover {
+    color: var(--color-primary);
+  }
+}
+
+@utility nav-link-active {
+  color: var(--color-primary);
+}
