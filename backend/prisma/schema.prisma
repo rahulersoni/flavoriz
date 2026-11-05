@@ -1,0 +1,528 @@
+
+generator client {
+  provider = "prisma-client"
+  output = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+enum UserStatus {
+  ACTIVE
+  PENDING_VERIFICATION
+  SUSPENDED
+  DEACTIVATED
+}
+
+enum RecipeStatus {
+  DRAFT
+  PENDING_REVIEW
+  PUBLISHED
+  REJECTED
+  ARCHIVED
+}
+
+enum RevisionStatus {
+  DRAFT
+  PENDING_REVIEW
+  APPROVED
+  REJECTED
+  SUPERSEDED
+}
+
+enum CommentStatus {
+  PENDING
+  APPROVED
+  HIDDEN
+  REJECTED
+}
+
+enum NewsletterStatus {
+  PENDING
+  SUBSCRIBED
+  UNSUBSCRIBED
+}
+
+enum ContactMessageStatus {
+  NEW
+  IN_PROGRESS
+  RESOLVED
+  SPAM
+}
+
+
+enum AuthTokenType {
+  EMAIL_VERIFICATION
+  PASSWORD_RESET
+}
+
+
+model User {
+  id                Int @id @default (autoincrement())
+  name              String
+  email             String? @unique
+  passwordHash      String?
+  status            UserStatus @default (PENDING_VERIFICATION)
+  emailVerifiedAt   DateTime?
+  authTokens        AuthToken[]
+  deletedAt         DateTime?
+  createdAt         DateTime @default (now())
+  updatedAt         DateTime @updatedAt
+
+  roles             UserRole[]
+  assignedRoles     UserRole[] @relation("RoleAssigner")
+  sessions          Session[]
+  authoredRecipes   Recipe[]
+  submittedRevisions RecipeRevision[] @relation("RevisionSubmitter")
+  reviewedRevisions RecipeRevision[] @relation("RevisionReviewer")
+  comments          Comment[]
+  recipeLikes       RecipeLike[]
+  commentLikes      CommentLike[]
+  bookmarks         Bookmark[]
+  ratings           RecipeRating[]
+  recipeViews       RecipeView[]
+  notifications     Notification[]
+  auditLogs         AuditLog[] @relation("AuditActor")
+  updatedSettings   GlobalSetting[] @relation("SettingUpdater")
+  authorSettings    AuthorSetting[]
+  uploadedMedia     MediaAsset[]
+
+  @@index([status, createdAt])
+  @@map("users")
+}
+
+
+model AuthToken {
+  id        String        @id @default(cuid()) @db.VarChar(30)
+  userId    Int
+  tokenHash String        @unique @db.VarChar(255)
+  type      AuthTokenType
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime      @default(now())
+
+  user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, type, expiresAt])
+  @@index([expiresAt, usedAt])
+  @@map("auth_tokens")
+}
+
+
+model Role {
+  id          Int @id @default (autoincrement())
+  name        String
+  slug        String @unique
+  description String?
+  isSystem    Boolean @default (false)
+  createdAt   DateTime @default (now())
+  updatedAt   DateTime @updatedAt
+
+  users       UserRole[]
+  permissions RolePermission[]
+
+  @@map("roles")
+}
+
+model Permission {
+  id          Int @id @default (autoincrement())
+  name        String
+  slug        String @unique
+  description String?
+  createdAt   DateTime @default (now())
+
+  roles       RolePermission[]
+
+  @@map("permissions")
+}
+
+model UserRole {
+  userId       Int
+  roleId       Int
+  assignedById Int?
+  assignedAt   DateTime @default (now())
+
+  user         User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role         Role @relation(fields: [roleId], references: [id], onDelete: Restrict)
+  assignedBy   User? @relation("RoleAssigner", fields: [assignedById], references: [id], onDelete: SetNull)
+
+  @@id([userId, roleId])
+  @@index([roleId])
+  @@index([assignedById])
+  @@map("user_roles")
+}
+
+model RolePermission {
+  roleId       Int
+  permissionId Int
+
+  role         Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, permissionId])
+  @@index([permissionId])
+  @@map("role_permissions")
+}
+
+model Session {
+  id               String @id @default (cuid()) @db.VarChar(30)
+  userId           Int
+  refreshTokenHash String @unique @db.VarChar(255)
+  expiresAt        DateTime
+  revokedAt        DateTime?
+  createdAt        DateTime @default (now())
+  lastUsedAt       DateTime?
+
+  user             User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, expiresAt])
+  @@index([expiresAt, revokedAt])
+  @@map("sessions")
+}
+
+model Recipe {
+  id              Int @id @default (autoincrement())
+  authorId        Int?
+  featuredImageId Int?
+  title           String @db.VarChar(255)
+  slug            String @unique @db.VarChar(191)
+  description     String? @db.Text
+  content         String? @db.LongText
+  status          RecipeStatus @default (DRAFT)
+  servings        Int?
+  prepTime        Int?
+  cookTime        Int?
+  difficulty      String? @db.VarChar(50)
+  readingTime     Int?
+  recipePdfUrl    String? @db.VarChar(2048)
+  publishedAt     DateTime?
+  createdAt       DateTime @default (now())
+  updatedAt       DateTime @updatedAt
+  deletedAt       DateTime?
+
+  author          User? @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  featuredImage   MediaAsset? @relation("RecipeFeaturedImage", fields: [featuredImageId], references: [id], onDelete: SetNull)
+  revisions       RecipeRevision[]
+  ingredients     RecipeIngredient[]
+  instructions    RecipeInstruction[]
+  categories      RecipeCategory[]
+  tags            RecipeTag[]
+  comments        Comment[]
+  likes           RecipeLike[]
+  bookmarks       Bookmark[]
+  ratings         RecipeRating[]
+  views           RecipeView[]
+
+  @@index([authorId, status])
+  @@index([status, publishedAt])
+  @@index([createdAt])
+  @@index([featuredImageId])
+  @@map("recipes")
+}
+
+model RecipeRevision {
+  id              Int @id @default (autoincrement())
+  recipeId        Int
+  submittedById   Int?
+  reviewedById    Int?
+  revisionNumber  Int
+  revisionData    Json
+  status          RevisionStatus @default (DRAFT)
+  rejectionReason String? @db.Text
+  reviewedAt      DateTime?
+  rejectedAt      DateTime?
+  createdAt       DateTime @default (now())
+  updatedAt       DateTime @updatedAt
+
+  recipe          Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  submittedBy     User? @relation("RevisionSubmitter", fields: [submittedById], references: [id], onDelete: SetNull)
+  reviewedBy      User? @relation("RevisionReviewer", fields: [reviewedById], references: [id], onDelete: SetNull)
+
+  @@unique([recipeId, revisionNumber])
+  @@index([status, createdAt])
+  @@index([recipeId, status])
+  @@index([submittedById])
+  @@index([reviewedById])
+  @@map("recipe_revisions")
+}
+
+model RecipeIngredient {
+  id        Int @id @default (autoincrement())
+  recipeId  Int
+  name      String @db.VarChar(255)
+  quantity  Decimal? @db.Decimal(10, 3)
+  unit      String? @db.VarChar(100)
+  notes     String? @db.Text
+  position  Int @default (0)
+  createdAt DateTime @default (now())
+  updatedAt DateTime @updatedAt
+
+  recipe    Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+
+  @@index([recipeId, position])
+  @@map("recipe_ingredients")
+}
+
+model RecipeInstruction {
+  id        Int @id @default (autoincrement())
+  recipeId  Int
+  imageId   Int?
+  title     String? @db.VarChar(255)
+  content   String @db.Text
+  position  Int @default (0)
+  createdAt DateTime @default (now())
+  updatedAt DateTime @updatedAt
+
+  recipe    Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  image     MediaAsset? @relation("InstructionImage", fields: [imageId], references: [id], onDelete: SetNull)
+
+  @@index([recipeId, position])
+  @@index([imageId])
+  @@map("recipe_instructions")
+}
+
+model Category {
+  id          Int @id @default (autoincrement())
+  parentId    Int?
+  name        String @db.VarChar(191)
+  slug        String @unique @db.VarChar(191)
+  description String? @db.Text
+  createdAt   DateTime @default (now())
+  updatedAt   DateTime @updatedAt
+
+  parent      Category? @relation("CategoryHierarchy", fields: [parentId], references: [id], onDelete: SetNull)
+  children    Category[] @relation("CategoryHierarchy")
+  recipes     RecipeCategory[]
+
+  @@index([parentId])
+  @@map("categories")
+}
+
+model RecipeCategory {
+  recipeId   Int
+  categoryId Int
+
+  recipe     Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@id([recipeId, categoryId])
+  @@index([categoryId])
+  @@map("recipe_categories")
+}
+
+model Tag {
+  id        Int @id @default (autoincrement())
+  name      String @db.VarChar(100)
+  slug      String @unique @db.VarChar(191)
+  createdAt DateTime @default (now())
+
+  recipes   RecipeTag[]
+
+  @@map("tags")
+}
+
+model RecipeTag {
+  recipeId Int
+  tagId    Int
+
+  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  tag      Tag @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([recipeId, tagId])
+  @@index([tagId])
+  @@map("recipe_tags")
+}
+
+model MediaAsset {
+  id           Int @id @default (autoincrement())
+  uploadedById Int?
+  storageKey   String @unique @db.VarChar(500)
+  url          String? @db.VarChar(2048)
+  originalName String? @db.VarChar(255)
+  mimeType     String @db.VarChar(100)
+  fileSize     BigInt
+  altText      String? @db.VarChar(500)
+  createdAt    DateTime @default (now())
+
+  uploadedBy   User? @relation(fields: [uploadedById], references: [id], onDelete: SetNull)
+  featuredFor  Recipe[]           @relation("RecipeFeaturedImage")
+  instructions RecipeInstruction[] @relation("InstructionImage")
+
+  @@index([uploadedById, createdAt])
+  @@map("media_assets")
+}
+
+model Comment {
+  id        Int @id @default (autoincrement())
+  recipeId  Int
+  userId    Int?
+  parentId  Int?
+  content   String @db.Text
+  status    CommentStatus @default (PENDING)
+  createdAt DateTime @default (now())
+  updatedAt DateTime @updatedAt
+  deletedAt DateTime?
+
+  recipe    Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  user      User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+  parent    Comment? @relation("CommentReplies", fields: [parentId], references: [id], onDelete: SetNull)
+  replies   Comment[] @relation("CommentReplies")
+  likes     CommentLike[]
+
+  @@index([recipeId, status, createdAt])
+  @@index([userId, createdAt])
+  @@index([parentId])
+  @@map("comments")
+}
+
+model RecipeLike {
+  userId    Int
+  recipeId  Int
+  createdAt DateTime @default (now())
+
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  recipe    Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+
+  @@id([userId, recipeId])
+  @@index([recipeId, createdAt])
+  @@map("recipe_likes")
+}
+
+model CommentLike {
+  userId    Int
+  commentId Int
+  createdAt DateTime @default (now())
+
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  comment   Comment @relation(fields: [commentId], references: [id], onDelete: Cascade)
+
+  @@id([userId, commentId])
+  @@index([commentId, createdAt])
+  @@map("comment_likes")
+}
+
+model Bookmark {
+  userId    Int
+  recipeId  Int
+  createdAt DateTime @default (now())
+
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  recipe    Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+
+  @@id([userId, recipeId])
+  @@index([recipeId, createdAt])
+  @@map("bookmarks")
+}
+
+model RecipeRating {
+  id        Int @id @default (autoincrement())
+  userId    Int
+  recipeId  Int
+  rating    Int
+  createdAt DateTime @default (now())
+  updatedAt DateTime @updatedAt
+
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  recipe    Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, recipeId])
+  @@index([recipeId, rating])
+  @@map("recipe_ratings")
+}
+
+model RecipeView {
+  id           BigInt @id @default (autoincrement())
+  recipeId     Int
+  viewerUserId Int?
+  viewedAt     DateTime @default (now())
+
+  recipe       Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  viewer       User? @relation(fields: [viewerUserId], references: [id], onDelete: SetNull)
+
+  @@index([recipeId, viewedAt])
+  @@index([viewerUserId, viewedAt])
+  @@map("recipe_views")
+}
+
+model Notification {
+  id        Int @id @default (autoincrement())
+  userId    Int
+  type String   @db.VarChar(100)
+  data      Json
+  readAt    DateTime?
+  createdAt DateTime @default (now())
+
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, readAt, createdAt])
+  @@map("notifications")
+}
+
+model AuditLog {
+  id         BigInt @id @default (autoincrement())
+  actorId    Int?
+  action     String @db.VarChar(150)
+  entityType String @db.VarChar(100)
+  entityId   String? @db.VarChar(100)
+  metadata   Json?
+  createdAt  DateTime @default (now())
+
+  actor      User? @relation("AuditActor", fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([actorId, createdAt])
+  @@index([entityType, entityId, createdAt])
+  @@index([action, createdAt])
+  @@map("audit_logs")
+}
+
+model GlobalSetting {
+  key         String @id @db.VarChar(191)
+  value       Json
+  updatedById Int?
+  updatedAt   DateTime @updatedAt
+
+  updatedBy   User? @relation("SettingUpdater", fields: [updatedById], references: [id], onDelete: SetNull)
+
+  @@map("global_settings")
+}
+
+model AuthorSetting {
+  userId    Int
+  key       String @db.VarChar(191)
+  value     Json
+  updatedAt DateTime @updatedAt
+
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, key])
+  @@map("author_settings")
+}
+
+model NewsletterSubscriber {
+  id                 Int @id @default (autoincrement())
+  email              String @unique @db.VarChar(320)
+  status             NewsletterStatus @default (PENDING)
+  consentedAt        DateTime?
+  unsubscribedAt     DateTime?
+  mailchimpContactId String? @db.VarChar(191)
+  createdAt          DateTime @default (now())
+  updatedAt          DateTime @updatedAt
+
+  @@index([status, createdAt])
+  @@map("newsletter_subscribers")
+}
+
+model ContactMessage {
+  id        Int @id @default (autoincrement())
+  name      String @db.VarChar(191)
+  email     String @db.VarChar(320)
+  subject   String? @db.VarChar(255)
+  message   String @db.Text
+  status    ContactMessageStatus @default (NEW)
+  createdAt DateTime @default (now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status, createdAt])
+  @@map("contact_messages")
+}
