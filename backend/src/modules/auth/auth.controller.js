@@ -1,4 +1,3 @@
-
 import {
     registerUser,
     verifyUserEmail,
@@ -74,7 +73,6 @@ export async function verifyEmail(req, res, next) {
     }
 }
 
-
 export async function refresh(req, res, next) {
     try {
         const refreshToken = req.cookies?.[
@@ -126,7 +124,6 @@ export async function refresh(req, res, next) {
     }
 }
 
-
 export async function logout(req, res, next) {
     try {
         const refreshToken = req.cookies?.[
@@ -152,4 +149,13 @@ export async function logout(req, res, next) {
     } catch (error) {
         return next(error);
     }
+}
+
+export async function getCurrentUser(req, res) {
+    return res.status(200).json({
+        success: true,
+        data: {
+            user: req.user,
+        },
+    });
 }

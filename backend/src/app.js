@@ -9,7 +9,8 @@ import healthRouter from "./routes/health.routes.js";
 import { env } from "./config/env.js";
 
 import authRouter from "./modules/auth/auth.routes.js";
-
+import permissionManagementRouter from "./modules/authorization/permissions/permission.routes.js";
+import roleRouter from "./modules/authorization/roles/role.routes.js";
 
 const app = express();
 
@@ -69,6 +70,8 @@ app.use("/api", apiLimiter);
 // Basic API health endpoint.
 app.use("/api/v1", healthRouter);
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/auth", permissionManagementRouter);
+app.use("/api/v1/roles", roleRouter);
 
 // Handle unknown routes.
 app.use((req, res) => {

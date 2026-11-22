@@ -8,7 +8,8 @@
     "test": "vitest run",
     "start": "node src/server.js",
     "test:watch": "vitest",
-    "seed": "node prisma/seed.js"
+    "seed": "node prisma/seed.js",
+    "bootstrap:admin": "node scripts/bootstrap-admin.js"
   },
   "keywords": [],
   "author": "",

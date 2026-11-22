@@ -266,6 +266,8 @@ export type UserWhereInput = {
   updatedSettings?: Prisma.GlobalSettingListRelationFilter
   authorSettings?: Prisma.AuthorSettingListRelationFilter
   uploadedMedia?: Prisma.MediaAssetListRelationFilter
+  permissionOverrides?: Prisma.UserPermissionOverrideListRelationFilter
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -296,6 +298,8 @@ export type UserOrderByWithRelationInput = {
   updatedSettings?: Prisma.GlobalSettingOrderByRelationAggregateInput
   authorSettings?: Prisma.AuthorSettingOrderByRelationAggregateInput
   uploadedMedia?: Prisma.MediaAssetOrderByRelationAggregateInput
+  permissionOverrides?: Prisma.UserPermissionOverrideOrderByRelationAggregateInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideOrderByRelationAggregateInput
   _relevance?: Prisma.UserOrderByRelevanceInput
 }
 
@@ -330,6 +334,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   updatedSettings?: Prisma.GlobalSettingListRelationFilter
   authorSettings?: Prisma.AuthorSettingListRelationFilter
   uploadedMedia?: Prisma.MediaAssetListRelationFilter
+  permissionOverrides?: Prisma.UserPermissionOverrideListRelationFilter
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -391,6 +397,8 @@ export type UserCreateInput = {
   updatedSettings?: Prisma.GlobalSettingCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -421,6 +429,8 @@ export type UserUncheckedCreateInput = {
   updatedSettings?: Prisma.GlobalSettingUncheckedCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingUncheckedCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserUpdateInput = {
@@ -450,6 +460,8 @@ export type UserUpdateInput = {
   updatedSettings?: Prisma.GlobalSettingUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -480,6 +492,8 @@ export type UserUncheckedUpdateInput = {
   updatedSettings?: Prisma.GlobalSettingUncheckedUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUncheckedUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUncheckedUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -647,6 +661,36 @@ export type UserUpdateOneWithoutAssignedRolesNestedInput = {
   delete?: Prisma.UserWhereInput | boolean
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAssignedRolesInput, Prisma.UserUpdateWithoutAssignedRolesInput>, Prisma.UserUncheckedUpdateWithoutAssignedRolesInput>
+}
+
+export type UserCreateNestedOneWithoutPermissionOverridesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPermissionOverridesInput, Prisma.UserUncheckedCreateWithoutPermissionOverridesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPermissionOverridesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutAssignedPermissionOverridesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAssignedPermissionOverridesInput, Prisma.UserUncheckedCreateWithoutAssignedPermissionOverridesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAssignedPermissionOverridesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutPermissionOverridesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPermissionOverridesInput, Prisma.UserUncheckedCreateWithoutPermissionOverridesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPermissionOverridesInput
+  upsert?: Prisma.UserUpsertWithoutPermissionOverridesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPermissionOverridesInput, Prisma.UserUpdateWithoutPermissionOverridesInput>, Prisma.UserUncheckedUpdateWithoutPermissionOverridesInput>
+}
+
+export type UserUpdateOneWithoutAssignedPermissionOverridesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAssignedPermissionOverridesInput, Prisma.UserUncheckedCreateWithoutAssignedPermissionOverridesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAssignedPermissionOverridesInput
+  upsert?: Prisma.UserUpsertWithoutAssignedPermissionOverridesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAssignedPermissionOverridesInput, Prisma.UserUpdateWithoutAssignedPermissionOverridesInput>, Prisma.UserUncheckedUpdateWithoutAssignedPermissionOverridesInput>
 }
 
 export type UserCreateNestedOneWithoutSessionsInput = {
@@ -901,6 +945,8 @@ export type UserCreateWithoutAuthTokensInput = {
   updatedSettings?: Prisma.GlobalSettingCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserUncheckedCreateWithoutAuthTokensInput = {
@@ -930,6 +976,8 @@ export type UserUncheckedCreateWithoutAuthTokensInput = {
   updatedSettings?: Prisma.GlobalSettingUncheckedCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingUncheckedCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserCreateOrConnectWithoutAuthTokensInput = {
@@ -974,6 +1022,8 @@ export type UserUpdateWithoutAuthTokensInput = {
   updatedSettings?: Prisma.GlobalSettingUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuthTokensInput = {
@@ -1003,6 +1053,8 @@ export type UserUncheckedUpdateWithoutAuthTokensInput = {
   updatedSettings?: Prisma.GlobalSettingUncheckedUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUncheckedUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUncheckedUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserCreateWithoutRolesInput = {
@@ -1031,6 +1083,8 @@ export type UserCreateWithoutRolesInput = {
   updatedSettings?: Prisma.GlobalSettingCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserUncheckedCreateWithoutRolesInput = {
@@ -1060,6 +1114,8 @@ export type UserUncheckedCreateWithoutRolesInput = {
   updatedSettings?: Prisma.GlobalSettingUncheckedCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingUncheckedCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserCreateOrConnectWithoutRolesInput = {
@@ -1093,6 +1149,8 @@ export type UserCreateWithoutAssignedRolesInput = {
   updatedSettings?: Prisma.GlobalSettingCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserUncheckedCreateWithoutAssignedRolesInput = {
@@ -1122,6 +1180,8 @@ export type UserUncheckedCreateWithoutAssignedRolesInput = {
   updatedSettings?: Prisma.GlobalSettingUncheckedCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingUncheckedCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserCreateOrConnectWithoutAssignedRolesInput = {
@@ -1166,6 +1226,8 @@ export type UserUpdateWithoutRolesInput = {
   updatedSettings?: Prisma.GlobalSettingUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRolesInput = {
@@ -1195,6 +1257,8 @@ export type UserUncheckedUpdateWithoutRolesInput = {
   updatedSettings?: Prisma.GlobalSettingUncheckedUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUncheckedUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUncheckedUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserUpsertWithoutAssignedRolesInput = {
@@ -1234,6 +1298,8 @@ export type UserUpdateWithoutAssignedRolesInput = {
   updatedSettings?: Prisma.GlobalSettingUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAssignedRolesInput = {
@@ -1263,6 +1329,284 @@ export type UserUncheckedUpdateWithoutAssignedRolesInput = {
   updatedSettings?: Prisma.GlobalSettingUncheckedUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUncheckedUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUncheckedUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutAssignedByNestedInput
+}
+
+export type UserCreateWithoutPermissionOverridesInput = {
+  name: string
+  email?: string | null
+  passwordHash?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  authTokens?: Prisma.AuthTokenCreateNestedManyWithoutUserInput
+  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  assignedRoles?: Prisma.UserRoleCreateNestedManyWithoutAssignedByInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  authoredRecipes?: Prisma.RecipeCreateNestedManyWithoutAuthorInput
+  submittedRevisions?: Prisma.RecipeRevisionCreateNestedManyWithoutSubmittedByInput
+  reviewedRevisions?: Prisma.RecipeRevisionCreateNestedManyWithoutReviewedByInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  recipeLikes?: Prisma.RecipeLikeCreateNestedManyWithoutUserInput
+  commentLikes?: Prisma.CommentLikeCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
+  ratings?: Prisma.RecipeRatingCreateNestedManyWithoutUserInput
+  recipeViews?: Prisma.RecipeViewCreateNestedManyWithoutViewerInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  updatedSettings?: Prisma.GlobalSettingCreateNestedManyWithoutUpdatedByInput
+  authorSettings?: Prisma.AuthorSettingCreateNestedManyWithoutUserInput
+  uploadedMedia?: Prisma.MediaAssetCreateNestedManyWithoutUploadedByInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutAssignedByInput
+}
+
+export type UserUncheckedCreateWithoutPermissionOverridesInput = {
+  id?: number
+  name: string
+  email?: string | null
+  passwordHash?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  authTokens?: Prisma.AuthTokenUncheckedCreateNestedManyWithoutUserInput
+  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  assignedRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutAssignedByInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  authoredRecipes?: Prisma.RecipeUncheckedCreateNestedManyWithoutAuthorInput
+  submittedRevisions?: Prisma.RecipeRevisionUncheckedCreateNestedManyWithoutSubmittedByInput
+  reviewedRevisions?: Prisma.RecipeRevisionUncheckedCreateNestedManyWithoutReviewedByInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  recipeLikes?: Prisma.RecipeLikeUncheckedCreateNestedManyWithoutUserInput
+  commentLikes?: Prisma.CommentLikeUncheckedCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
+  ratings?: Prisma.RecipeRatingUncheckedCreateNestedManyWithoutUserInput
+  recipeViews?: Prisma.RecipeViewUncheckedCreateNestedManyWithoutViewerInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  updatedSettings?: Prisma.GlobalSettingUncheckedCreateNestedManyWithoutUpdatedByInput
+  authorSettings?: Prisma.AuthorSettingUncheckedCreateNestedManyWithoutUserInput
+  uploadedMedia?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUploadedByInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutAssignedByInput
+}
+
+export type UserCreateOrConnectWithoutPermissionOverridesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPermissionOverridesInput, Prisma.UserUncheckedCreateWithoutPermissionOverridesInput>
+}
+
+export type UserCreateWithoutAssignedPermissionOverridesInput = {
+  name: string
+  email?: string | null
+  passwordHash?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  authTokens?: Prisma.AuthTokenCreateNestedManyWithoutUserInput
+  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  assignedRoles?: Prisma.UserRoleCreateNestedManyWithoutAssignedByInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  authoredRecipes?: Prisma.RecipeCreateNestedManyWithoutAuthorInput
+  submittedRevisions?: Prisma.RecipeRevisionCreateNestedManyWithoutSubmittedByInput
+  reviewedRevisions?: Prisma.RecipeRevisionCreateNestedManyWithoutReviewedByInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  recipeLikes?: Prisma.RecipeLikeCreateNestedManyWithoutUserInput
+  commentLikes?: Prisma.CommentLikeCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
+  ratings?: Prisma.RecipeRatingCreateNestedManyWithoutUserInput
+  recipeViews?: Prisma.RecipeViewCreateNestedManyWithoutViewerInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  updatedSettings?: Prisma.GlobalSettingCreateNestedManyWithoutUpdatedByInput
+  authorSettings?: Prisma.AuthorSettingCreateNestedManyWithoutUserInput
+  uploadedMedia?: Prisma.MediaAssetCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutAssignedPermissionOverridesInput = {
+  id?: number
+  name: string
+  email?: string | null
+  passwordHash?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  authTokens?: Prisma.AuthTokenUncheckedCreateNestedManyWithoutUserInput
+  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  assignedRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutAssignedByInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  authoredRecipes?: Prisma.RecipeUncheckedCreateNestedManyWithoutAuthorInput
+  submittedRevisions?: Prisma.RecipeRevisionUncheckedCreateNestedManyWithoutSubmittedByInput
+  reviewedRevisions?: Prisma.RecipeRevisionUncheckedCreateNestedManyWithoutReviewedByInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  recipeLikes?: Prisma.RecipeLikeUncheckedCreateNestedManyWithoutUserInput
+  commentLikes?: Prisma.CommentLikeUncheckedCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
+  ratings?: Prisma.RecipeRatingUncheckedCreateNestedManyWithoutUserInput
+  recipeViews?: Prisma.RecipeViewUncheckedCreateNestedManyWithoutViewerInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  updatedSettings?: Prisma.GlobalSettingUncheckedCreateNestedManyWithoutUpdatedByInput
+  authorSettings?: Prisma.AuthorSettingUncheckedCreateNestedManyWithoutUserInput
+  uploadedMedia?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutAssignedPermissionOverridesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAssignedPermissionOverridesInput, Prisma.UserUncheckedCreateWithoutAssignedPermissionOverridesInput>
+}
+
+export type UserUpsertWithoutPermissionOverridesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPermissionOverridesInput, Prisma.UserUncheckedUpdateWithoutPermissionOverridesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPermissionOverridesInput, Prisma.UserUncheckedCreateWithoutPermissionOverridesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPermissionOverridesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPermissionOverridesInput, Prisma.UserUncheckedUpdateWithoutPermissionOverridesInput>
+}
+
+export type UserUpdateWithoutPermissionOverridesInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  authTokens?: Prisma.AuthTokenUpdateManyWithoutUserNestedInput
+  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  assignedRoles?: Prisma.UserRoleUpdateManyWithoutAssignedByNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  authoredRecipes?: Prisma.RecipeUpdateManyWithoutAuthorNestedInput
+  submittedRevisions?: Prisma.RecipeRevisionUpdateManyWithoutSubmittedByNestedInput
+  reviewedRevisions?: Prisma.RecipeRevisionUpdateManyWithoutReviewedByNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  recipeLikes?: Prisma.RecipeLikeUpdateManyWithoutUserNestedInput
+  commentLikes?: Prisma.CommentLikeUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
+  ratings?: Prisma.RecipeRatingUpdateManyWithoutUserNestedInput
+  recipeViews?: Prisma.RecipeViewUpdateManyWithoutViewerNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  updatedSettings?: Prisma.GlobalSettingUpdateManyWithoutUpdatedByNestedInput
+  authorSettings?: Prisma.AuthorSettingUpdateManyWithoutUserNestedInput
+  uploadedMedia?: Prisma.MediaAssetUpdateManyWithoutUploadedByNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutAssignedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPermissionOverridesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  authTokens?: Prisma.AuthTokenUncheckedUpdateManyWithoutUserNestedInput
+  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  assignedRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutAssignedByNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  authoredRecipes?: Prisma.RecipeUncheckedUpdateManyWithoutAuthorNestedInput
+  submittedRevisions?: Prisma.RecipeRevisionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  reviewedRevisions?: Prisma.RecipeRevisionUncheckedUpdateManyWithoutReviewedByNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  recipeLikes?: Prisma.RecipeLikeUncheckedUpdateManyWithoutUserNestedInput
+  commentLikes?: Prisma.CommentLikeUncheckedUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
+  ratings?: Prisma.RecipeRatingUncheckedUpdateManyWithoutUserNestedInput
+  recipeViews?: Prisma.RecipeViewUncheckedUpdateManyWithoutViewerNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  updatedSettings?: Prisma.GlobalSettingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  authorSettings?: Prisma.AuthorSettingUncheckedUpdateManyWithoutUserNestedInput
+  uploadedMedia?: Prisma.MediaAssetUncheckedUpdateManyWithoutUploadedByNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutAssignedByNestedInput
+}
+
+export type UserUpsertWithoutAssignedPermissionOverridesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAssignedPermissionOverridesInput, Prisma.UserUncheckedUpdateWithoutAssignedPermissionOverridesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAssignedPermissionOverridesInput, Prisma.UserUncheckedCreateWithoutAssignedPermissionOverridesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAssignedPermissionOverridesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAssignedPermissionOverridesInput, Prisma.UserUncheckedUpdateWithoutAssignedPermissionOverridesInput>
+}
+
+export type UserUpdateWithoutAssignedPermissionOverridesInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  authTokens?: Prisma.AuthTokenUpdateManyWithoutUserNestedInput
+  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  assignedRoles?: Prisma.UserRoleUpdateManyWithoutAssignedByNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  authoredRecipes?: Prisma.RecipeUpdateManyWithoutAuthorNestedInput
+  submittedRevisions?: Prisma.RecipeRevisionUpdateManyWithoutSubmittedByNestedInput
+  reviewedRevisions?: Prisma.RecipeRevisionUpdateManyWithoutReviewedByNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  recipeLikes?: Prisma.RecipeLikeUpdateManyWithoutUserNestedInput
+  commentLikes?: Prisma.CommentLikeUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
+  ratings?: Prisma.RecipeRatingUpdateManyWithoutUserNestedInput
+  recipeViews?: Prisma.RecipeViewUpdateManyWithoutViewerNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  updatedSettings?: Prisma.GlobalSettingUpdateManyWithoutUpdatedByNestedInput
+  authorSettings?: Prisma.AuthorSettingUpdateManyWithoutUserNestedInput
+  uploadedMedia?: Prisma.MediaAssetUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAssignedPermissionOverridesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  authTokens?: Prisma.AuthTokenUncheckedUpdateManyWithoutUserNestedInput
+  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  assignedRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutAssignedByNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  authoredRecipes?: Prisma.RecipeUncheckedUpdateManyWithoutAuthorNestedInput
+  submittedRevisions?: Prisma.RecipeRevisionUncheckedUpdateManyWithoutSubmittedByNestedInput
+  reviewedRevisions?: Prisma.RecipeRevisionUncheckedUpdateManyWithoutReviewedByNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  recipeLikes?: Prisma.RecipeLikeUncheckedUpdateManyWithoutUserNestedInput
+  commentLikes?: Prisma.CommentLikeUncheckedUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
+  ratings?: Prisma.RecipeRatingUncheckedUpdateManyWithoutUserNestedInput
+  recipeViews?: Prisma.RecipeViewUncheckedUpdateManyWithoutViewerNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  updatedSettings?: Prisma.GlobalSettingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  authorSettings?: Prisma.AuthorSettingUncheckedUpdateManyWithoutUserNestedInput
+  uploadedMedia?: Prisma.MediaAssetUncheckedUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -1291,6 +1635,8 @@ export type UserCreateWithoutSessionsInput = {
   updatedSettings?: Prisma.GlobalSettingCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -1320,6 +1666,8 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   updatedSettings?: Prisma.GlobalSettingUncheckedCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingUncheckedCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -1364,6 +1712,8 @@ export type UserUpdateWithoutSessionsInput = {
   updatedSettings?: Prisma.GlobalSettingUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -1393,6 +1743,8 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   updatedSettings?: Prisma.GlobalSettingUncheckedUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUncheckedUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUncheckedUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserCreateWithoutAuthoredRecipesInput = {
@@ -1421,6 +1773,8 @@ export type UserCreateWithoutAuthoredRecipesInput = {
   updatedSettings?: Prisma.GlobalSettingCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserUncheckedCreateWithoutAuthoredRecipesInput = {
@@ -1450,6 +1804,8 @@ export type UserUncheckedCreateWithoutAuthoredRecipesInput = {
   updatedSettings?: Prisma.GlobalSettingUncheckedCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingUncheckedCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserCreateOrConnectWithoutAuthoredRecipesInput = {
@@ -1494,6 +1850,8 @@ export type UserUpdateWithoutAuthoredRecipesInput = {
   updatedSettings?: Prisma.GlobalSettingUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuthoredRecipesInput = {
@@ -1523,6 +1881,8 @@ export type UserUncheckedUpdateWithoutAuthoredRecipesInput = {
   updatedSettings?: Prisma.GlobalSettingUncheckedUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUncheckedUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUncheckedUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserCreateWithoutSubmittedRevisionsInput = {
@@ -1551,6 +1911,8 @@ export type UserCreateWithoutSubmittedRevisionsInput = {
   updatedSettings?: Prisma.GlobalSettingCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserUncheckedCreateWithoutSubmittedRevisionsInput = {
@@ -1580,6 +1942,8 @@ export type UserUncheckedCreateWithoutSubmittedRevisionsInput = {
   updatedSettings?: Prisma.GlobalSettingUncheckedCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingUncheckedCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserCreateOrConnectWithoutSubmittedRevisionsInput = {
@@ -1613,6 +1977,8 @@ export type UserCreateWithoutReviewedRevisionsInput = {
   updatedSettings?: Prisma.GlobalSettingCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserUncheckedCreateWithoutReviewedRevisionsInput = {
@@ -1642,6 +2008,8 @@ export type UserUncheckedCreateWithoutReviewedRevisionsInput = {
   updatedSettings?: Prisma.GlobalSettingUncheckedCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingUncheckedCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserCreateOrConnectWithoutReviewedRevisionsInput = {
@@ -1686,6 +2054,8 @@ export type UserUpdateWithoutSubmittedRevisionsInput = {
   updatedSettings?: Prisma.GlobalSettingUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSubmittedRevisionsInput = {
@@ -1715,6 +2085,8 @@ export type UserUncheckedUpdateWithoutSubmittedRevisionsInput = {
   updatedSettings?: Prisma.GlobalSettingUncheckedUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUncheckedUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUncheckedUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserUpsertWithoutReviewedRevisionsInput = {
@@ -1754,6 +2126,8 @@ export type UserUpdateWithoutReviewedRevisionsInput = {
   updatedSettings?: Prisma.GlobalSettingUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReviewedRevisionsInput = {
@@ -1783,6 +2157,8 @@ export type UserUncheckedUpdateWithoutReviewedRevisionsInput = {
   updatedSettings?: Prisma.GlobalSettingUncheckedUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUncheckedUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUncheckedUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserCreateWithoutUploadedMediaInput = {
@@ -1811,6 +2187,8 @@ export type UserCreateWithoutUploadedMediaInput = {
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
   updatedSettings?: Prisma.GlobalSettingCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingCreateNestedManyWithoutUserInput
+  permissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserUncheckedCreateWithoutUploadedMediaInput = {
@@ -1840,6 +2218,8 @@ export type UserUncheckedCreateWithoutUploadedMediaInput = {
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
   updatedSettings?: Prisma.GlobalSettingUncheckedCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingUncheckedCreateNestedManyWithoutUserInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserCreateOrConnectWithoutUploadedMediaInput = {
@@ -1884,6 +2264,8 @@ export type UserUpdateWithoutUploadedMediaInput = {
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
   updatedSettings?: Prisma.GlobalSettingUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUpdateManyWithoutUserNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUploadedMediaInput = {
@@ -1913,6 +2295,8 @@ export type UserUncheckedUpdateWithoutUploadedMediaInput = {
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
   updatedSettings?: Prisma.GlobalSettingUncheckedUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUncheckedUpdateManyWithoutUserNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserCreateWithoutCommentsInput = {
@@ -1941,6 +2325,8 @@ export type UserCreateWithoutCommentsInput = {
   updatedSettings?: Prisma.GlobalSettingCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserUncheckedCreateWithoutCommentsInput = {
@@ -1970,6 +2356,8 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   updatedSettings?: Prisma.GlobalSettingUncheckedCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingUncheckedCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserCreateOrConnectWithoutCommentsInput = {
@@ -2014,6 +2402,8 @@ export type UserUpdateWithoutCommentsInput = {
   updatedSettings?: Prisma.GlobalSettingUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -2043,6 +2433,8 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   updatedSettings?: Prisma.GlobalSettingUncheckedUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUncheckedUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUncheckedUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserCreateWithoutRecipeLikesInput = {
@@ -2071,6 +2463,8 @@ export type UserCreateWithoutRecipeLikesInput = {
   updatedSettings?: Prisma.GlobalSettingCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserUncheckedCreateWithoutRecipeLikesInput = {
@@ -2100,6 +2494,8 @@ export type UserUncheckedCreateWithoutRecipeLikesInput = {
   updatedSettings?: Prisma.GlobalSettingUncheckedCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingUncheckedCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserCreateOrConnectWithoutRecipeLikesInput = {
@@ -2144,6 +2540,8 @@ export type UserUpdateWithoutRecipeLikesInput = {
   updatedSettings?: Prisma.GlobalSettingUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRecipeLikesInput = {
@@ -2173,6 +2571,8 @@ export type UserUncheckedUpdateWithoutRecipeLikesInput = {
   updatedSettings?: Prisma.GlobalSettingUncheckedUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUncheckedUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUncheckedUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserCreateWithoutCommentLikesInput = {
@@ -2201,6 +2601,8 @@ export type UserCreateWithoutCommentLikesInput = {
   updatedSettings?: Prisma.GlobalSettingCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserUncheckedCreateWithoutCommentLikesInput = {
@@ -2230,6 +2632,8 @@ export type UserUncheckedCreateWithoutCommentLikesInput = {
   updatedSettings?: Prisma.GlobalSettingUncheckedCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingUncheckedCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserCreateOrConnectWithoutCommentLikesInput = {
@@ -2274,6 +2678,8 @@ export type UserUpdateWithoutCommentLikesInput = {
   updatedSettings?: Prisma.GlobalSettingUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCommentLikesInput = {
@@ -2303,6 +2709,8 @@ export type UserUncheckedUpdateWithoutCommentLikesInput = {
   updatedSettings?: Prisma.GlobalSettingUncheckedUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUncheckedUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUncheckedUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserCreateWithoutBookmarksInput = {
@@ -2331,6 +2739,8 @@ export type UserCreateWithoutBookmarksInput = {
   updatedSettings?: Prisma.GlobalSettingCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserUncheckedCreateWithoutBookmarksInput = {
@@ -2360,6 +2770,8 @@ export type UserUncheckedCreateWithoutBookmarksInput = {
   updatedSettings?: Prisma.GlobalSettingUncheckedCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingUncheckedCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserCreateOrConnectWithoutBookmarksInput = {
@@ -2404,6 +2816,8 @@ export type UserUpdateWithoutBookmarksInput = {
   updatedSettings?: Prisma.GlobalSettingUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBookmarksInput = {
@@ -2433,6 +2847,8 @@ export type UserUncheckedUpdateWithoutBookmarksInput = {
   updatedSettings?: Prisma.GlobalSettingUncheckedUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUncheckedUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUncheckedUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserCreateWithoutRatingsInput = {
@@ -2461,6 +2877,8 @@ export type UserCreateWithoutRatingsInput = {
   updatedSettings?: Prisma.GlobalSettingCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserUncheckedCreateWithoutRatingsInput = {
@@ -2490,6 +2908,8 @@ export type UserUncheckedCreateWithoutRatingsInput = {
   updatedSettings?: Prisma.GlobalSettingUncheckedCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingUncheckedCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserCreateOrConnectWithoutRatingsInput = {
@@ -2534,6 +2954,8 @@ export type UserUpdateWithoutRatingsInput = {
   updatedSettings?: Prisma.GlobalSettingUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRatingsInput = {
@@ -2563,6 +2985,8 @@ export type UserUncheckedUpdateWithoutRatingsInput = {
   updatedSettings?: Prisma.GlobalSettingUncheckedUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUncheckedUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUncheckedUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserCreateWithoutRecipeViewsInput = {
@@ -2591,6 +3015,8 @@ export type UserCreateWithoutRecipeViewsInput = {
   updatedSettings?: Prisma.GlobalSettingCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserUncheckedCreateWithoutRecipeViewsInput = {
@@ -2620,6 +3046,8 @@ export type UserUncheckedCreateWithoutRecipeViewsInput = {
   updatedSettings?: Prisma.GlobalSettingUncheckedCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingUncheckedCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserCreateOrConnectWithoutRecipeViewsInput = {
@@ -2664,6 +3092,8 @@ export type UserUpdateWithoutRecipeViewsInput = {
   updatedSettings?: Prisma.GlobalSettingUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRecipeViewsInput = {
@@ -2693,6 +3123,8 @@ export type UserUncheckedUpdateWithoutRecipeViewsInput = {
   updatedSettings?: Prisma.GlobalSettingUncheckedUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUncheckedUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUncheckedUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserCreateWithoutNotificationsInput = {
@@ -2721,6 +3153,8 @@ export type UserCreateWithoutNotificationsInput = {
   updatedSettings?: Prisma.GlobalSettingCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -2750,6 +3184,8 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   updatedSettings?: Prisma.GlobalSettingUncheckedCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingUncheckedCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -2794,6 +3230,8 @@ export type UserUpdateWithoutNotificationsInput = {
   updatedSettings?: Prisma.GlobalSettingUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -2823,6 +3261,8 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   updatedSettings?: Prisma.GlobalSettingUncheckedUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUncheckedUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUncheckedUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserCreateWithoutAuditLogsInput = {
@@ -2851,6 +3291,8 @@ export type UserCreateWithoutAuditLogsInput = {
   updatedSettings?: Prisma.GlobalSettingCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserUncheckedCreateWithoutAuditLogsInput = {
@@ -2880,6 +3322,8 @@ export type UserUncheckedCreateWithoutAuditLogsInput = {
   updatedSettings?: Prisma.GlobalSettingUncheckedCreateNestedManyWithoutUpdatedByInput
   authorSettings?: Prisma.AuthorSettingUncheckedCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserCreateOrConnectWithoutAuditLogsInput = {
@@ -2924,6 +3368,8 @@ export type UserUpdateWithoutAuditLogsInput = {
   updatedSettings?: Prisma.GlobalSettingUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuditLogsInput = {
@@ -2953,6 +3399,8 @@ export type UserUncheckedUpdateWithoutAuditLogsInput = {
   updatedSettings?: Prisma.GlobalSettingUncheckedUpdateManyWithoutUpdatedByNestedInput
   authorSettings?: Prisma.AuthorSettingUncheckedUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUncheckedUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserCreateWithoutUpdatedSettingsInput = {
@@ -2981,6 +3429,8 @@ export type UserCreateWithoutUpdatedSettingsInput = {
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
   authorSettings?: Prisma.AuthorSettingCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserUncheckedCreateWithoutUpdatedSettingsInput = {
@@ -3010,6 +3460,8 @@ export type UserUncheckedCreateWithoutUpdatedSettingsInput = {
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
   authorSettings?: Prisma.AuthorSettingUncheckedCreateNestedManyWithoutUserInput
   uploadedMedia?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserCreateOrConnectWithoutUpdatedSettingsInput = {
@@ -3054,6 +3506,8 @@ export type UserUpdateWithoutUpdatedSettingsInput = {
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
   authorSettings?: Prisma.AuthorSettingUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUpdatedSettingsInput = {
@@ -3083,6 +3537,8 @@ export type UserUncheckedUpdateWithoutUpdatedSettingsInput = {
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
   authorSettings?: Prisma.AuthorSettingUncheckedUpdateManyWithoutUserNestedInput
   uploadedMedia?: Prisma.MediaAssetUncheckedUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserCreateWithoutAuthorSettingsInput = {
@@ -3111,6 +3567,8 @@ export type UserCreateWithoutAuthorSettingsInput = {
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
   updatedSettings?: Prisma.GlobalSettingCreateNestedManyWithoutUpdatedByInput
   uploadedMedia?: Prisma.MediaAssetCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserUncheckedCreateWithoutAuthorSettingsInput = {
@@ -3140,6 +3598,8 @@ export type UserUncheckedCreateWithoutAuthorSettingsInput = {
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
   updatedSettings?: Prisma.GlobalSettingUncheckedCreateNestedManyWithoutUpdatedByInput
   uploadedMedia?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUploadedByInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutUserInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutAssignedByInput
 }
 
 export type UserCreateOrConnectWithoutAuthorSettingsInput = {
@@ -3184,6 +3644,8 @@ export type UserUpdateWithoutAuthorSettingsInput = {
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
   updatedSettings?: Prisma.GlobalSettingUpdateManyWithoutUpdatedByNestedInput
   uploadedMedia?: Prisma.MediaAssetUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutAssignedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuthorSettingsInput = {
@@ -3213,6 +3675,8 @@ export type UserUncheckedUpdateWithoutAuthorSettingsInput = {
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
   updatedSettings?: Prisma.GlobalSettingUncheckedUpdateManyWithoutUpdatedByNestedInput
   uploadedMedia?: Prisma.MediaAssetUncheckedUpdateManyWithoutUploadedByNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutUserNestedInput
+  assignedPermissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutAssignedByNestedInput
 }
 
 
@@ -3239,6 +3703,8 @@ export type UserCountOutputType = {
   updatedSettings: number
   authorSettings: number
   uploadedMedia: number
+  permissionOverrides: number
+  assignedPermissionOverrides: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3260,6 +3726,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   updatedSettings?: boolean | UserCountOutputTypeCountUpdatedSettingsArgs
   authorSettings?: boolean | UserCountOutputTypeCountAuthorSettingsArgs
   uploadedMedia?: boolean | UserCountOutputTypeCountUploadedMediaArgs
+  permissionOverrides?: boolean | UserCountOutputTypeCountPermissionOverridesArgs
+  assignedPermissionOverrides?: boolean | UserCountOutputTypeCountAssignedPermissionOverridesArgs
 }
 
 /**
@@ -3398,6 +3866,20 @@ export type UserCountOutputTypeCountUploadedMediaArgs<ExtArgs extends runtime.Ty
   where?: Prisma.MediaAssetWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPermissionOverridesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserPermissionOverrideWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAssignedPermissionOverridesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserPermissionOverrideWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -3427,6 +3909,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   updatedSettings?: boolean | Prisma.User$updatedSettingsArgs<ExtArgs>
   authorSettings?: boolean | Prisma.User$authorSettingsArgs<ExtArgs>
   uploadedMedia?: boolean | Prisma.User$uploadedMediaArgs<ExtArgs>
+  permissionOverrides?: boolean | Prisma.User$permissionOverridesArgs<ExtArgs>
+  assignedPermissionOverrides?: boolean | Prisma.User$assignedPermissionOverridesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -3464,6 +3948,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   updatedSettings?: boolean | Prisma.User$updatedSettingsArgs<ExtArgs>
   authorSettings?: boolean | Prisma.User$authorSettingsArgs<ExtArgs>
   uploadedMedia?: boolean | Prisma.User$uploadedMediaArgs<ExtArgs>
+  permissionOverrides?: boolean | Prisma.User$permissionOverridesArgs<ExtArgs>
+  assignedPermissionOverrides?: boolean | Prisma.User$assignedPermissionOverridesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -3488,6 +3974,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     updatedSettings: Prisma.$GlobalSettingPayload<ExtArgs>[]
     authorSettings: Prisma.$AuthorSettingPayload<ExtArgs>[]
     uploadedMedia: Prisma.$MediaAssetPayload<ExtArgs>[]
+    permissionOverrides: Prisma.$UserPermissionOverridePayload<ExtArgs>[]
+    assignedPermissionOverrides: Prisma.$UserPermissionOverridePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -3857,6 +4345,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   updatedSettings<T extends Prisma.User$updatedSettingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedSettingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GlobalSettingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   authorSettings<T extends Prisma.User$authorSettingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$authorSettingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuthorSettingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   uploadedMedia<T extends Prisma.User$uploadedMediaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$uploadedMediaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MediaAssetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  permissionOverrides<T extends Prisma.User$permissionOverridesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$permissionOverridesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPermissionOverridePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  assignedPermissionOverrides<T extends Prisma.User$assignedPermissionOverridesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$assignedPermissionOverridesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPermissionOverridePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4672,6 +5162,54 @@ export type User$uploadedMediaArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.MediaAssetScalarFieldEnum | Prisma.MediaAssetScalarFieldEnum[]
+}
+
+/**
+ * User.permissionOverrides
+ */
+export type User$permissionOverridesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserPermissionOverride
+   */
+  select?: Prisma.UserPermissionOverrideSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserPermissionOverride
+   */
+  omit?: Prisma.UserPermissionOverrideOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserPermissionOverrideInclude<ExtArgs> | null
+  where?: Prisma.UserPermissionOverrideWhereInput
+  orderBy?: Prisma.UserPermissionOverrideOrderByWithRelationInput | Prisma.UserPermissionOverrideOrderByWithRelationInput[]
+  cursor?: Prisma.UserPermissionOverrideWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserPermissionOverrideScalarFieldEnum | Prisma.UserPermissionOverrideScalarFieldEnum[]
+}
+
+/**
+ * User.assignedPermissionOverrides
+ */
+export type User$assignedPermissionOverridesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserPermissionOverride
+   */
+  select?: Prisma.UserPermissionOverrideSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserPermissionOverride
+   */
+  omit?: Prisma.UserPermissionOverrideOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserPermissionOverrideInclude<ExtArgs> | null
+  where?: Prisma.UserPermissionOverrideWhereInput
+  orderBy?: Prisma.UserPermissionOverrideOrderByWithRelationInput | Prisma.UserPermissionOverrideOrderByWithRelationInput[]
+  cursor?: Prisma.UserPermissionOverrideWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserPermissionOverrideScalarFieldEnum | Prisma.UserPermissionOverrideScalarFieldEnum[]
 }
 
 /**

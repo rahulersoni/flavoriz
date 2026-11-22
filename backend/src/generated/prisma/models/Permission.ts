@@ -216,6 +216,7 @@ export type PermissionWhereInput = {
   slug?: Prisma.StringFilter<"Permission"> | string
   description?: Prisma.StringNullableFilter<"Permission"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Permission"> | Date | string
+  userOverrides?: Prisma.UserPermissionOverrideListRelationFilter
   roles?: Prisma.RolePermissionListRelationFilter
 }
 
@@ -225,6 +226,7 @@ export type PermissionOrderByWithRelationInput = {
   slug?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  userOverrides?: Prisma.UserPermissionOverrideOrderByRelationAggregateInput
   roles?: Prisma.RolePermissionOrderByRelationAggregateInput
   _relevance?: Prisma.PermissionOrderByRelevanceInput
 }
@@ -238,6 +240,7 @@ export type PermissionWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"Permission"> | string
   description?: Prisma.StringNullableFilter<"Permission"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Permission"> | Date | string
+  userOverrides?: Prisma.UserPermissionOverrideListRelationFilter
   roles?: Prisma.RolePermissionListRelationFilter
 }, "id" | "slug">
 
@@ -270,6 +273,7 @@ export type PermissionCreateInput = {
   slug: string
   description?: string | null
   createdAt?: Date | string
+  userOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutPermissionInput
   roles?: Prisma.RolePermissionCreateNestedManyWithoutPermissionInput
 }
 
@@ -279,6 +283,7 @@ export type PermissionUncheckedCreateInput = {
   slug: string
   description?: string | null
   createdAt?: Date | string
+  userOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutPermissionInput
   roles?: Prisma.RolePermissionUncheckedCreateNestedManyWithoutPermissionInput
 }
 
@@ -287,6 +292,7 @@ export type PermissionUpdateInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutPermissionNestedInput
   roles?: Prisma.RolePermissionUpdateManyWithoutPermissionNestedInput
 }
 
@@ -296,6 +302,7 @@ export type PermissionUncheckedUpdateInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutPermissionNestedInput
   roles?: Prisma.RolePermissionUncheckedUpdateManyWithoutPermissionNestedInput
 }
 
@@ -379,11 +386,26 @@ export type PermissionUpdateOneRequiredWithoutRolesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.PermissionUpdateToOneWithWhereWithoutRolesInput, Prisma.PermissionUpdateWithoutRolesInput>, Prisma.PermissionUncheckedUpdateWithoutRolesInput>
 }
 
+export type PermissionCreateNestedOneWithoutUserOverridesInput = {
+  create?: Prisma.XOR<Prisma.PermissionCreateWithoutUserOverridesInput, Prisma.PermissionUncheckedCreateWithoutUserOverridesInput>
+  connectOrCreate?: Prisma.PermissionCreateOrConnectWithoutUserOverridesInput
+  connect?: Prisma.PermissionWhereUniqueInput
+}
+
+export type PermissionUpdateOneRequiredWithoutUserOverridesNestedInput = {
+  create?: Prisma.XOR<Prisma.PermissionCreateWithoutUserOverridesInput, Prisma.PermissionUncheckedCreateWithoutUserOverridesInput>
+  connectOrCreate?: Prisma.PermissionCreateOrConnectWithoutUserOverridesInput
+  upsert?: Prisma.PermissionUpsertWithoutUserOverridesInput
+  connect?: Prisma.PermissionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PermissionUpdateToOneWithWhereWithoutUserOverridesInput, Prisma.PermissionUpdateWithoutUserOverridesInput>, Prisma.PermissionUncheckedUpdateWithoutUserOverridesInput>
+}
+
 export type PermissionCreateWithoutRolesInput = {
   name: string
   slug: string
   description?: string | null
   createdAt?: Date | string
+  userOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutPermissionInput
 }
 
 export type PermissionUncheckedCreateWithoutRolesInput = {
@@ -392,6 +414,7 @@ export type PermissionUncheckedCreateWithoutRolesInput = {
   slug: string
   description?: string | null
   createdAt?: Date | string
+  userOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutPermissionInput
 }
 
 export type PermissionCreateOrConnectWithoutRolesInput = {
@@ -415,6 +438,7 @@ export type PermissionUpdateWithoutRolesInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutPermissionNestedInput
 }
 
 export type PermissionUncheckedUpdateWithoutRolesInput = {
@@ -423,6 +447,57 @@ export type PermissionUncheckedUpdateWithoutRolesInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutPermissionNestedInput
+}
+
+export type PermissionCreateWithoutUserOverridesInput = {
+  name: string
+  slug: string
+  description?: string | null
+  createdAt?: Date | string
+  roles?: Prisma.RolePermissionCreateNestedManyWithoutPermissionInput
+}
+
+export type PermissionUncheckedCreateWithoutUserOverridesInput = {
+  id?: number
+  name: string
+  slug: string
+  description?: string | null
+  createdAt?: Date | string
+  roles?: Prisma.RolePermissionUncheckedCreateNestedManyWithoutPermissionInput
+}
+
+export type PermissionCreateOrConnectWithoutUserOverridesInput = {
+  where: Prisma.PermissionWhereUniqueInput
+  create: Prisma.XOR<Prisma.PermissionCreateWithoutUserOverridesInput, Prisma.PermissionUncheckedCreateWithoutUserOverridesInput>
+}
+
+export type PermissionUpsertWithoutUserOverridesInput = {
+  update: Prisma.XOR<Prisma.PermissionUpdateWithoutUserOverridesInput, Prisma.PermissionUncheckedUpdateWithoutUserOverridesInput>
+  create: Prisma.XOR<Prisma.PermissionCreateWithoutUserOverridesInput, Prisma.PermissionUncheckedCreateWithoutUserOverridesInput>
+  where?: Prisma.PermissionWhereInput
+}
+
+export type PermissionUpdateToOneWithWhereWithoutUserOverridesInput = {
+  where?: Prisma.PermissionWhereInput
+  data: Prisma.XOR<Prisma.PermissionUpdateWithoutUserOverridesInput, Prisma.PermissionUncheckedUpdateWithoutUserOverridesInput>
+}
+
+export type PermissionUpdateWithoutUserOverridesInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  roles?: Prisma.RolePermissionUpdateManyWithoutPermissionNestedInput
+}
+
+export type PermissionUncheckedUpdateWithoutUserOverridesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  roles?: Prisma.RolePermissionUncheckedUpdateManyWithoutPermissionNestedInput
 }
 
 
@@ -431,10 +506,12 @@ export type PermissionUncheckedUpdateWithoutRolesInput = {
  */
 
 export type PermissionCountOutputType = {
+  userOverrides: number
   roles: number
 }
 
 export type PermissionCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  userOverrides?: boolean | PermissionCountOutputTypeCountUserOverridesArgs
   roles?: boolean | PermissionCountOutputTypeCountRolesArgs
 }
 
@@ -451,6 +528,13 @@ export type PermissionCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.E
 /**
  * PermissionCountOutputType without action
  */
+export type PermissionCountOutputTypeCountUserOverridesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserPermissionOverrideWhereInput
+}
+
+/**
+ * PermissionCountOutputType without action
+ */
 export type PermissionCountOutputTypeCountRolesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.RolePermissionWhereInput
 }
@@ -462,6 +546,7 @@ export type PermissionSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   slug?: boolean
   description?: boolean
   createdAt?: boolean
+  userOverrides?: boolean | Prisma.Permission$userOverridesArgs<ExtArgs>
   roles?: boolean | Prisma.Permission$rolesArgs<ExtArgs>
   _count?: boolean | Prisma.PermissionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["permission"]>
@@ -478,6 +563,7 @@ export type PermissionSelectScalar = {
 
 export type PermissionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "description" | "createdAt", ExtArgs["result"]["permission"]>
 export type PermissionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  userOverrides?: boolean | Prisma.Permission$userOverridesArgs<ExtArgs>
   roles?: boolean | Prisma.Permission$rolesArgs<ExtArgs>
   _count?: boolean | Prisma.PermissionCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -485,6 +571,7 @@ export type PermissionInclude<ExtArgs extends runtime.Types.Extensions.InternalA
 export type $PermissionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Permission"
   objects: {
+    userOverrides: Prisma.$UserPermissionOverridePayload<ExtArgs>[]
     roles: Prisma.$RolePermissionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -833,6 +920,7 @@ readonly fields: PermissionFieldRefs;
  */
 export interface Prisma__PermissionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  userOverrides<T extends Prisma.Permission$userOverridesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Permission$userOverridesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPermissionOverridePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   roles<T extends Prisma.Permission$rolesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Permission$rolesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RolePermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1213,6 +1301,30 @@ export type PermissionDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Limit how many Permissions to delete.
    */
   limit?: number
+}
+
+/**
+ * Permission.userOverrides
+ */
+export type Permission$userOverridesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserPermissionOverride
+   */
+  select?: Prisma.UserPermissionOverrideSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserPermissionOverride
+   */
+  omit?: Prisma.UserPermissionOverrideOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserPermissionOverrideInclude<ExtArgs> | null
+  where?: Prisma.UserPermissionOverrideWhereInput
+  orderBy?: Prisma.UserPermissionOverrideOrderByWithRelationInput | Prisma.UserPermissionOverrideOrderByWithRelationInput[]
+  cursor?: Prisma.UserPermissionOverrideWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserPermissionOverrideScalarFieldEnum | Prisma.UserPermissionOverrideScalarFieldEnum[]
 }
 
 /**

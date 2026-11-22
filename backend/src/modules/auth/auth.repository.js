@@ -1,4 +1,3 @@
-
 import { prisma } from "../../lib/prisma.js";
 
 export async function findUserByEmail(email) {
@@ -91,7 +90,6 @@ export async function createAuthToken({
     });
 }
 
-
 export async function verifyEmailToken(tokenHash) {
     const now = new Date();
 
@@ -167,7 +165,6 @@ export async function findUserForLogin(email) {
     });
 }
 
-
 export async function createSession({
     userId,
     refreshTokenHash,
@@ -187,8 +184,6 @@ export async function createSession({
         },
     });
 }
-
-
 
 export async function rotateSession({
     refreshTokenHash,
@@ -271,7 +266,6 @@ export async function rotateSession({
     });
 }
 
-
 export async function revokeSession(refreshTokenHash) {
     const now = new Date();
 
@@ -283,6 +277,118 @@ export async function revokeSession(refreshTokenHash) {
         data: {
             revokedAt: now,
             lastUsedAt: now,
+        },
+    });
+}
+
+export async function findUserPermissionOverrides(userId) {
+    return prisma.userPermissionOverride.findMany({
+        where: { userId },
+        select: {
+            id: true,
+            isGranted: true,
+            createdAt: true,
+            updatedAt: true,
+            permission: {
+                select: {
+                    id: true,
+                    name: true,
+                    slug: true,
+                },
+            },
+            assignedBy: {
+                select: {
+                    id: true,
+                    name: true,
+                },
+            },
+        },
+        orderBy: {
+            permission: {
+                slug: "asc",
+            },
+        },
+    });
+}
+
+export async function findPermissionBySlug(permissionSlug) {
+    return prisma.permission.findUnique({
+        where: {
+            slug: permissionSlug,
+        },
+        select: {
+            id: true,
+            name: true,
+            slug: true,
+        },
+    });
+}
+
+export async function upsertUserPermissionOverride({
+    userId,
+    permissionId,
+    isGranted,
+    assignedById,
+}) {
+    return prisma.userPermissionOverride.upsert({
+        where: {
+            userId_permissionId: {
+                userId,
+                permissionId,
+            },
+        },
+        update: {
+            isGranted,
+            assignedById,
+        },
+        create: {
+            userId,
+            permissionId,
+            isGranted,
+            assignedById,
+        },
+        select: {
+            id: true,
+            userId: true,
+            permissionId: true,
+            isGranted: true,
+            assignedById: true,
+            createdAt: true,
+            updatedAt: true,
+        },
+    });
+}
+
+export async function deleteUserPermissionOverride({
+    userId,
+    permissionId,
+}) {
+    return prisma.userPermissionOverride.deleteMany({
+        where: {
+            userId,
+            permissionId,
+        },
+    });
+}
+
+export async function findUserForPermissionManagement(userId) {
+    return prisma.user.findUnique({
+        where: { id: userId },
+        select: {
+            id: true,
+            name: true,
+            email: true,
+            status: true,
+            roles: {
+                select: {
+                    role: {
+                        select: {
+                            slug: true,
+                            isSystem: true,
+                        },
+                    },
+                },
+            },
         },
     });
 }
