@@ -6,12 +6,13 @@ import {
     logoutUser
 } from "./auth.service.js";
 
-
+import { resolveUserPermissions } from "../authorization/permissions/permission.service.js";
 import { env } from "../../config/env.js";
 
 export async function login(req, res, next) {
     try {
         const result = await loginUser(req.body);
+        const authorization = await resolveUserPermissions(result.user.id);
 
         const isProduction = env.NODE_ENV === "production";
 
@@ -34,6 +35,7 @@ export async function login(req, res, next) {
             message: "Login successful.",
             data: {
                 user: result.user,
+                authorization,
                 accessToken: result.accessToken,
                 sessionExpiresAt: result.sessionExpiresAt,
             },
@@ -50,8 +52,7 @@ export async function register(req, res, next) {
 
         return res.status(201).json({
             success: true,
-            message:
-                "Registration successful. Please verify your email to activate your account.",
+            message: "Registration successful. Please verify your email to activate your account.",
             data: result,
         });
     } catch (error) {
@@ -79,7 +80,20 @@ export async function refresh(req, res, next) {
             env.REFRESH_TOKEN_COOKIE_NAME
         ];
 
+        // No refresh cookie means the visitor is not logged in.
+        if (!refreshToken) {
+            return res.status(200).json({
+                success: true,
+                authenticated: false,
+                message: "No active session found.",
+            });
+        }
+
         const result = await refreshUserSession(refreshToken);
+
+        const authorization = await resolveUserPermissions(
+            result.user.id
+        );
 
         const isProduction = env.NODE_ENV === "production";
 
@@ -102,6 +116,7 @@ export async function refresh(req, res, next) {
             message: "Session refreshed successfully.",
             data: {
                 user: result.user,
+                authorization,
                 accessToken: result.accessToken,
                 sessionExpiresAt: result.sessionExpiresAt,
             },
@@ -151,11 +166,27 @@ export async function logout(req, res, next) {
     }
 }
 
-export async function getCurrentUser(req, res) {
-    return res.status(200).json({
-        success: true,
-        data: {
-            user: req.user,
-        },
-    });
+export async function getCurrentUser(req, res, next) {
+    try {
+        const authorization = await resolveUserPermissions(
+            req.user.id
+        );
+
+        if (!authorization) {
+            return res.status(404).json({
+                success: false,
+                message: "User authorization information not found.",
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            data: {
+                user: req.user,
+                authorization,
+            },
+        });
+    } catch (error) {
+        return next(error);
+    }
 }

@@ -1,18 +1,10 @@
 import argon2 from "argon2";
 import { createHash, randomBytes } from "node:crypto";
-
+import { verificationEmailTemplate } from "../../templates/verification-email.js"
+import { sendEmail } from "../../services/email.service.js"
 import { env } from "../../config/env.js";
-import {
-    registerSchema,
-    verifyEmailSchema,
-    loginSchema,
-} from "./auth.schemas.js";
-
-import {
-    generateAccessToken,
-    generateRefreshToken,
-    hashToken,
-} from "./auth.tokens.js";
+import { registerSchema, verifyEmailSchema, loginSchema } from "./auth.schemas.js";
+import { generateAccessToken, generateRefreshToken, hashToken } from "./auth.tokens.js";
 
 import {
     createUserWithSubscriberRole,
@@ -83,7 +75,19 @@ export async function registerUser(input) {
         throw error;
     }
 
-    // Email delivery will be connected in a later step.
+    // Send account verification email.
+
+    const verificationUrl = `${env.FRONTEND_URL}/verify-email?token=${verificationToken}`;
+    const userEmailAddress = (env.NODE_ENV !== "production") ? env.RESEND_REGISTRATION_EMAIL : user.email;
+
+    const emailSent = await sendEmail({
+        to: userEmailAddress,
+        subject: "Verify your Flavoriz account",
+        html: verificationEmailTemplate(verificationUrl),
+    });
+
+    console.log(emailSent);
+
     // Never return the raw verification token from the production API.
     if (env.NODE_ENV !== "production") {
         return {

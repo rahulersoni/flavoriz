@@ -6,7 +6,7 @@ export function RecipeLikeButton({ recipe, showCount = false, className = "" }) 
 
     if (!recipe?.id) return null;
 
-    const liked = isRecipeLiked(recipe.id);
+    const liked = [];
 
     return (
         <button

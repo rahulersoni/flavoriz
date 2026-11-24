@@ -128,13 +128,20 @@ const shouldSkipRefresh = (url = "") => {
 // Refresh access token
 // --------------------------------------------------
 
-const refreshAccessToken = async () => {
+export const refreshAccessToken = async () => {
     if (!refreshPromise) {
         refreshPromise = api
             .post("/auth/refresh", {})
             .then((response) => {
-                const newAccessToken =
-                    response.data?.data?.accessToken;
+                const data = response.data?.data;
+
+                // No active session.
+                if (response.data?.authenticated === false) {
+                    clearAccessToken();
+                    return null;
+                }
+
+                const newAccessToken = data?.accessToken;
 
                 if (!newAccessToken) {
                     throw new Error(

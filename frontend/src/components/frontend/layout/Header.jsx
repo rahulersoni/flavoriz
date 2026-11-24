@@ -16,10 +16,9 @@ export default function Header() {
   const accountMenuRef = useRef(null);
   const navigate = useNavigate();
 
-  const { user, isAuthenticated, logout } = useAuth();
+  const { user, isAuthenticated, isAdmin, can, logout } = useAuth();
 
-  const isAdmin = user?.role === "admin";
-  const isAuthor = user?.role === "author";
+  const isAuthor = can("recipes.create");
 
   useEffect(() => {
     const handlePointerDown = (event) => {
@@ -143,7 +142,7 @@ export default function Header() {
                     <>
                       {/* User Information */}
                       <div className="border-b border-border px-3 py-3">
-                        <p className="truncate text-sm font-semibold text-text">
+                        <p className="truncate text-sm font-semibold text-text capitalize">
                           {user?.name}
                         </p>
                         <p className="mt-1 truncate text-xs text-soft">

@@ -7,11 +7,12 @@ import Container from "../components/frontend/Container";
 import Reveal from "../components/Reveal";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 export default function Auth() {
 
     const navigate = useNavigate();
-    const { login, registerUser } = useAuth();
+    const { login, register: registerUser } = useAuth();
     const [searchParams, setSearchParams] = useSearchParams();
     const [mode, setMode] = useState(() => searchParams.get("mode") === "register" ? "register" : "login");
 
@@ -29,8 +30,8 @@ export default function Auth() {
     const { register, handleSubmit, watch, reset, formState: { errors, isSubmitting } } = useForm({
         defaultValues: {
             name: "",
-            email: "demo@flavoriz.com",
-            password: "password123",
+            email: "john@example.com",
+            password: "StrongPassword123!",
             confirmPassword: "",
             remember: false,
         },
@@ -41,15 +42,41 @@ export default function Auth() {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const onSubmit = async (data) => {
+        try {
+            if (isRegister) {
+                const { confirmPassword, remember, ...userData } = data;
 
-        const result = isRegister ? registerUser(data) : login(data);
+                const result = await registerUser(userData);
 
-        if (!result.success) {
-            console.log(result.message);
-            return;
+                toast.success(
+                    result.message || "Registration successful."
+                );
+
+                console.log(result);
+
+                // We'll connect this to the email verification screen.
+                // navigate("/verify-email", {
+                //     state: { email: userData.email },
+                // });
+
+                return;
+            }
+
+            const { confirmPassword, remember, name, ...userData } = data;
+            const loggedInUser = await login(userData);
+
+            console.log(loggedInUser);
+            toast.success("Login successful.");
+
+            navigate("/");
+        } catch (error) {
+            const message =
+                error.response?.data?.message ||
+                error.message ||
+                "Something went wrong. Please try again.";
+
+            toast.error(message);
         }
-
-        navigate("/");
     };
 
     return (

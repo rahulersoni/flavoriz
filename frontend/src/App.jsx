@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import FrontendLayout from "./layouts/FrontendLayout";
 const AdminLayout = lazy(() => import("./layouts/AdminLayout"));
-import AdminRoute from "../src/routes/AdminRoute"
+import AdminRoute from "./routes/AdminRoute"
 
 // Frontend pages
 const Home = lazy(() => import("./pages/Home"));
@@ -11,6 +11,7 @@ const About = lazy(() => import("./pages/About"));
 const Recipes = lazy(() => import("./pages/Recipes"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Account = lazy(() => import("./pages/Account"));
+const VerifyEmail = lazy(() => import("./pages/VerifyEmail"));
 const RecipeSingle = lazy(() => import("./pages/RecipeSingle"));
 
 // User dashboard pages
@@ -56,6 +57,7 @@ export default function App() {
             <Route path="/about" element={<About />} />
             <Route path="/recipes" element={<Recipes />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/verify-email" element={<VerifyEmail />} />
           </Route>
 
           {/* User account */}

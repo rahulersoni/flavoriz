@@ -24,6 +24,14 @@ const envSchema = z.object({
     ACCESS_TOKEN_EXPIRES_IN: z.string().default("15m"),
     REFRESH_TOKEN_EXPIRES_IN_DAYS: z.coerce.number().int().min(1).max(90).default(30),
     REFRESH_TOKEN_COOKIE_NAME: z.string().min(1).default("flavoriz_refresh"),
+
+    RESEND_API_KEY: z.string().min(30),
+    MAIL_FROM: z.string().min(30),
+    RESEND_REGISTRATION_EMAIL: z.string().pipe(
+        z.email({
+            error: "Enter a valid email address."
+        })
+    )
 });
 
 const result = envSchema.safeParse(process.env);

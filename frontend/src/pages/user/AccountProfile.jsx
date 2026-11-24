@@ -4,32 +4,35 @@ import { Bookmark, Heart, MessageCircle, CalendarDays, ArrowRight, Clock } from 
 import { useAuth } from "../../context/AuthContext";
 
 export default function AccountProfile() {
-    const { user, daysAsMember, savedRecipes, likedRecipes, comments } = useAuth();
+    const { user, daysAsMember, savedRecipes = [], likedRecipes, comments } = useAuth();
+
+    console.log(user);
 
     const isAdmin = user?.role === "admin";
     const isAuthor = user?.role === "author";
-    const userComments = comments.filter(
-        (comment) => Number(comment.userId) === Number(user?.id)
-    );
+    // const userComments = comments.filter(
+    //     (comment) => Number(comment.userId) === Number(user?.id)
+    // );
+    const userComments = [];
 
     const stats = [
         {
             label: "Saved Recipes",
-            value: savedRecipes.length,
+            value: 0,
             icon: Bookmark,
             color: "text-amber-600 bg-amber-100",
             link: "/account/saved-recipes",
         },
         {
             label: "Liked Recipes",
-            value: likedRecipes.length,
+            value: 0,
             icon: Heart,
             color: "text-rose-600 bg-rose-100",
             link: "/account/liked-recipes",
         },
         {
             label: "Comments",
-            value: userComments.length,
+            value: 0,
             icon: MessageCircle,
             color: "text-sky-600 bg-sky-100",
             link: "/account/comments",
@@ -59,7 +62,10 @@ export default function AccountProfile() {
                         </p>
 
                         <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
-                            Welcome back, {user?.name?.split(" ")[0] || "Food Lover"}!
+                            Welcome Back,
+                            <span className="pl-2 capitalize">
+                                {user?.name?.split(" ")[0] || "Food Lover"}!
+                            </span>
                         </h1>
 
                         <p className="text-sm text-stone-500 dark:text-stone-400">
