@@ -6,8 +6,6 @@ import { useAuth } from "../../context/AuthContext";
 export default function AccountProfile() {
     const { user, daysAsMember, savedRecipes = [], likedRecipes, comments } = useAuth();
 
-    console.log(user);
-
     const isAdmin = user?.role === "admin";
     const isAuthor = user?.role === "author";
     // const userComments = comments.filter(

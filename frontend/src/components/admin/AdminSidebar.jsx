@@ -12,11 +12,6 @@ const mainItems = [
     to: "/admin/recipes",
     icon: ChefHat,
   },
-  // {
-  //   label: "Articles",
-  //   to: "/admin/articles",
-  //   icon: FileText,
-  // },
   {
     label: "Users",
     to: "/admin/users",

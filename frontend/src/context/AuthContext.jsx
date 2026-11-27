@@ -1,20 +1,6 @@
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
 
-import {
-    createContext,
-    useCallback,
-    useContext,
-    useEffect,
-    useState,
-} from "react";
-
-import {
-    loginUser,
-    registerUser,
-    verifyEmail,
-    refreshSession,
-    getCurrentUser,
-    logoutUser,
-} from "../api/auth.api.js";
+import { loginUser, registerUser, verifyEmail, refreshSession, getCurrentUser, logoutUser } from "../api/auth.api.js";
 
 import { clearAccessToken } from "../api/axios.js";
 
